@@ -5,6 +5,16 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 
+// imports para iconos
+import { addIcons } from 'ionicons';
+import { addOutline, pricetagsOutline, trashOutline } from 'ionicons/icons';
+
+addIcons({
+  'add-outline': addOutline,
+  'pricetags-outline': pricetagsOutline,
+  'trash-outline': trashOutline,
+});
+
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

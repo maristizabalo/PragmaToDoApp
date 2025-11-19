@@ -33,33 +33,20 @@
     </div>
 
     <ion-list class="tasks-list">
-      <ion-item *ngFor="let task of tasks; trackBy: trackByTaskId" lines="full">
-        <ion-checkbox
-          slot="start"
-          [checked]="task.completed"
-          (ionChange)="toggleTask(task)"
-        ></ion-checkbox>
+      <ion-item *ngFor="let task of filteredTasks; trackBy: trackByTaskId" lines="full">
+        <ion-checkbox slot="start" [checked]="task.completed" (ionChange)="toggleTask(task)"></ion-checkbox>
 
         <ion-label>
           <h2 [class.task-completed]="task.completed">{{ task.title }}</h2>
-          <p *ngIf="task.categoryName" class="task-category">
-            <ion-chip size="small" color="secondary">
-              <ion-label>{{ task.categoryName }}</ion-label>
-            </ion-chip>
-          </p>
+          <!-- la idea e smostrar aqui luego la categoria -->
         </ion-label>
 
-        <ion-button
-          fill="clear"
-          color="medium"
-          slot="end"
-          (click)="deleteTask(task)"
-        >
+        <ion-button fill="clear" color="medium" slot="end" (click)="deleteTask(task)">
           <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
         </ion-button>
       </ion-item>
 
-      <ion-item *ngIf="!tasks.length">
+      <ion-item *ngIf="!filteredTasks.length">
         <ion-label color="medium">
           No tienes tareas aún. Crea la primera con el botón +
         </ion-label>

@@ -18,40 +18,14 @@
       </ion-chip>
     </div>
 
-    <div class="home-filters">
-      <ion-segment value="all" (ionChange)="onSegmentChange($event)">
-        <ion-segment-button value="all">
-          <ion-label>Todo</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="pending">
-          <ion-label>Pendientes</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="done">
-          <ion-label>Completadas</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
+    <!-- FILTERS AND TASKS LIST -->
+    <app-task-filters [currentSegment]="currentSegment" [categories]="categories"
+      [selectedCategoryId]="selectedCategoryId" (segmentChange)="onSegmentChange($event)"
+      (categoryChange)="selectCategory($event)" (createCategory)="openCreateCategoryAlert()"></app-task-filters>
 
-    <ion-list class="tasks-list">
-      <ion-item *ngFor="let task of filteredTasks; trackBy: trackByTaskId" lines="full">
-        <ion-checkbox slot="start" [checked]="task.completed" (ionChange)="toggleTask(task)"></ion-checkbox>
-
-        <ion-label>
-          <h2 [class.task-completed]="task.completed">{{ task.title }}</h2>
-          <!-- la idea e smostrar aqui luego la categoria -->
-        </ion-label>
-
-        <ion-button fill="clear" color="medium" slot="end" (click)="deleteTask(task)">
-          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-        </ion-button>
-      </ion-item>
-
-      <ion-item *ngIf="!filteredTasks.length">
-        <ion-label color="medium">
-          No tienes tareas aún. Crea la primera con el botón +
-        </ion-label>
-      </ion-item>
-    </ion-list>
+    <!-- Lista de tareas -->
+    <app-tasks-list [tasks]="filteredTasks" (toggle)="toggleTask($event)"
+      (delete)="deleteTask($event)"></app-tasks-list>
   </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

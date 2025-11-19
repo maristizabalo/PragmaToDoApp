@@ -1,20 +1,75 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title>Pragma To-Do</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="app-container">
+    <div class="card home-hero">
+      <h1 class="app-title">Organiza tu día</h1>
+      <p class="app-subtitle">
+        Crea tareas, asígnales categorías y mantén tu foco en lo importante.
+      </p>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <ion-chip color="secondary" outline="true">
+        <ion-icon name="pricetags-outline"></ion-icon>
+        <ion-label>Gestionar categorías</ion-label>
+      </ion-chip>
+    </div>
+
+    <div class="home-filters">
+      <ion-segment value="all" (ionChange)="onSegmentChange($event)">
+        <ion-segment-button value="all">
+          <ion-label>Todo</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="pending">
+          <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="done">
+          <ion-label>Completadas</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <ion-list class="tasks-list">
+      <ion-item *ngFor="let task of tasks; trackBy: trackByTaskId" lines="full">
+        <ion-checkbox
+          slot="start"
+          [checked]="task.completed"
+          (ionChange)="toggleTask(task)"
+        ></ion-checkbox>
+
+        <ion-label>
+          <h2 [class.task-completed]="task.completed">{{ task.title }}</h2>
+          <p *ngIf="task.categoryName" class="task-category">
+            <ion-chip size="small" color="secondary">
+              <ion-label>{{ task.categoryName }}</ion-label>
+            </ion-chip>
+          </p>
+        </ion-label>
+
+        <ion-button
+          fill="clear"
+          color="medium"
+          slot="end"
+          (click)="deleteTask(task)"
+        >
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item *ngIf="!tasks.length">
+        <ion-label color="medium">
+          No tienes tareas aún. Crea la primera con el botón +
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="openCreateTaskModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

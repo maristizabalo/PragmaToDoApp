@@ -1,0 +1,7 @@
+{
+  "name": "PragmaToDoApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

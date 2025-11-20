@@ -25,9 +25,7 @@ type TaskSegment = 'all' | 'pending' | 'done';
     CommonModule,
     FormsModule,
     TasksListComponent,
-    TaskFiltersComponent,
-    TaskFormComponent,
-    CategoryManagerComponent,
+    TaskFiltersComponent
   ],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],

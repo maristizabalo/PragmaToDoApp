@@ -23,8 +23,7 @@
       [selectedCategoryId]="selectedCategoryId" (segmentChange)="onSegmentChange($event)"
       (categoryChange)="selectCategory($event)" (createCategory)="openCreateCategoryAlert()"></app-task-filters>
 
-    <!-- Lista de tareas -->
-    <app-tasks-list [tasks]="filteredTasks" (toggle)="toggleTask($event)"
+    <app-tasks-list [tasks]="filteredTasks" [categories]="categories" (toggle)="toggleTask($event)"
       (delete)="deleteTask($event)"></app-tasks-list>
   </div>
 

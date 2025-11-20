@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, AlertController } from '@ionic/angular';
+import { IonicModule, AlertController, ModalController } from '@ionic/angular';
+
+import { TaskFormComponent } from './components/task-form/task-form.component';
 
 import { Task } from '../core/models/task.model';
 import { TaskService } from '../core/services/task.service';
@@ -36,8 +38,9 @@ export class HomePage implements OnInit {
   constructor(
     private readonly taskService: TaskService,
     private readonly categoryService: CategoryService,
-    private readonly alertCtrl: AlertController
-  ) {}
+    private readonly alertCtrl: AlertController,
+    private readonly modalCtrl: ModalController
+  ) { }
 
   ngOnInit(): void {
     this.loadTasks();
@@ -76,37 +79,33 @@ export class HomePage implements OnInit {
   }
 
   async openCreateTaskModal() {
-    const alert = await this.alertCtrl.create({
-      header: 'Nueva tarea',
-      inputs: [
-        {
-          name: 'title',
-          type: 'text',
-          placeholder: '¿Qué necesitas hacer?',
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Guardar',
-          handler: (data) => {
-            const title = (data?.title || '').trim();
-            if (!title) return false;
-
-            const newTask = this.taskService.createTask(title, null);
-            this.tasks = [newTask, ...this.tasks];
-            this.persistTasks();
-            return true;
-          },
-        },
-      ],
+    const modal = await this.modalCtrl.create({
+      component: TaskFormComponent,
+      componentProps: {
+        header: 'Nueva tarea',
+        categories: this.categories,
+        initialTitle: '',
+        initialCategoryId: this.selectedCategoryId,
+      },
+      breakpoints: [0, 0.4, 0.8],
+      initialBreakpoint: 0.5,
     });
 
-    await alert.present();
+    await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+    if (role === 'save' && data) {
+      const { title, categoryId } = data as {
+        title: string;
+        categoryId: string | null;
+      };
+
+      const newTask = this.taskService.createTask(title, categoryId);
+      this.tasks = [newTask, ...this.tasks];
+      this.persistTasks();
+    }
   }
+
 
   toggleTask(task: Task) {
     this.tasks = this.tasks.map((t) =>

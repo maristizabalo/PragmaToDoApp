@@ -62,10 +62,42 @@ ion-app {
   opacity: 0.8;
 }
 
-/* reutilizable para demas tajrteas */
 .card {
-  border-radius: 18px;
+  border-radius: var(--app-radius-lg);
   padding: 16px;
   background: rgba(15, 23, 42, 0.96);
-  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.75);
+  box-shadow: var(--app-shadow-primary);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+ion-modal {
+  --border-radius: var(--app-radius-xl);
+  --box-shadow: var(--app-shadow-soft);
+  --backdrop-opacity: 0.45;
+}
+
+// contenedor interno del modal
+ion-modal::part(content) {
+  border-radius: var(--app-radius-xl);
+  overflow: hidden;
+}
+
+ion-item {
+  --border-radius: var(--app-radius-lg);
+}
+
+ion-input,
+ion-select,
+ion-textarea {
+  --border-radius: var(--app-radius-lg);
+  border-radius: var(--app-radius-lg);
+}
+
+// para que noq ueden tan epgados
+ion-list {
+  border-radius: var(--app-radius-lg);
+}
+
+ion-button {
+  --border-radius: 999px;
 }

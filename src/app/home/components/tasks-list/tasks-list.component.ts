@@ -3,33 +3,40 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 import { Task } from '../../../core/models/task.model';
+import { Category } from '../../../core/models/category.model';
 
 @Component({
-  selector: 'app-tasks-list',
-  standalone: true,
-  imports: [IonicModule, CommonModule],
-  templateUrl: './tasks-list.component.html',
-  styleUrls: ['./tasks-list.component.scss'],
+    selector: 'app-tasks-list',
+    standalone: true,
+    imports: [IonicModule, CommonModule],
+    templateUrl: './tasks-list.component.html',
+    styleUrls: ['./tasks-list.component.scss'],
 })
 export class TasksListComponent {
-  @Input() tasks: Task[] = [];
+    @Input() tasks: Task[] = [];
+    @Input() categories: Category[] = [];
 
-  @Output() toggle = new EventEmitter<Task>();
-  @Output() delete = new EventEmitter<Task>();
+    @Output() toggle = new EventEmitter<Task>();
+    @Output() delete = new EventEmitter<Task>();
 
-  onToggle(task: Task) {
-    this.toggle.emit(task);
-  }
+    onToggle(task: Task) {
+        this.toggle.emit(task);
+    }
 
-  onDelete(task: Task) {
-    this.delete.emit(task);
-  }
+    onDelete(task: Task) {
+        this.delete.emit(task);
+    }
 
-  trackByTaskId(index: number, task: Task) {
-    return task.id;
-  }
+    trackByTaskId(index: number, task: Task) {
+        return task.id;
+    }
 
-  get hasTasks(): boolean {
-    return this.tasks && this.tasks.length > 0;
-  }
+    getCategoryForTask(task: Task): Category | undefined {
+        if (!task.categoryId) return undefined;
+        return this.categories.find((c) => c.id === task.categoryId);
+    }
+
+    get hasTasks(): boolean {
+        return this.tasks && this.tasks.length > 0;
+    }
 }

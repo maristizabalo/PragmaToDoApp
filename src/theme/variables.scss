@@ -58,4 +58,11 @@
   --ion-color-light-contrast-rgb: 17, 24, 39;
   --ion-color-light-shade: #e5e7eb;
   --ion-color-light-tint: #ffffff;
+
+  /* TOKENS CUSTOM DE LA APP */
+  --app-radius-lg: 18px;
+  --app-radius-xl: 24px;
+
+  --app-shadow-primary: 0 18px 35px rgba(76, 29, 149, 0.7); // morado para un shadow en todo estilo pragma :)
+  --app-shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.75);
 }

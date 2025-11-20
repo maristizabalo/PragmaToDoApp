@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
@@ -10,6 +10,7 @@ import { Category } from '../../../core/models/category.model';
   imports: [IonicModule, CommonModule, FormsModule],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskFormComponent implements OnInit {
   @Input() header: string = 'Tarea';
@@ -32,12 +33,12 @@ export class TaskFormComponent implements OnInit {
   }
 
   save() {
-    const trimmedTitle = this.title.trim();
-    if (!trimmedTitle) return;
+    const trimmed = this.title.trim();
+    if (!trimmed) return;
 
     this.modalCtrl.dismiss(
-      { title: trimmedTitle, categoryId: this.categoryId || null },
-      'save'
+      { title: trimmed, categoryId: this.categoryId || null },
+      'save',
     );
   }
 }

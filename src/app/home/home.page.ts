@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, AlertController, ModalController } from '@ionic/angular';
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { TaskFormComponent } from './components/task-form/task-form.component';
 
@@ -30,7 +33,7 @@ type TaskSegment = 'all' | 'pending' | 'done';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   tasks: Task[] = [];
   categories: Category[] = [];
 
@@ -40,27 +43,36 @@ export class HomePage implements OnInit {
   // feature flag para habilitar/deshabilitar categorías
   categoriesEnabled = true;
 
+  private readonly destroy$ = new Subject<void>();
+
   constructor(
     private readonly taskService: TaskService,
     private readonly categoryService: CategoryService,
     private readonly alertCtrl: AlertController,
     private readonly modalCtrl: ModalController,
     private readonly featureFlagsService: FeatureFlagsService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadTasks();
     this.loadCategories();
 
-    // suscripción al feature flag de categorías
-    this.featureFlagsService.categoriesEnabled$.subscribe((enabled) => {
-      this.categoriesEnabled = enabled;
+    // suscripción al feature flag de categorías con unsubscribe controlado
+    this.featureFlagsService.categoriesEnabled$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((enabled) => {
+        this.categoriesEnabled = enabled;
 
-      // si por alguna razon se deshabilitan las categorías, limpiamos el filtro de categoría seleccionado
-      if (!enabled) {
-        this.selectedCategoryId = null;
-      }
-    });
+        // si se deshabilitan las categorías, limpiamos el filtro
+        if (!enabled) {
+          this.selectedCategoryId = null;
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // TASK METHODS

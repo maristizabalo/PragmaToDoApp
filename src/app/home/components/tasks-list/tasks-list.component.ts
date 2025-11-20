@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
@@ -11,6 +17,7 @@ import { Category } from '../../../core/models/category.model';
   imports: [IonicModule, CommonModule],
   templateUrl: './tasks-list.component.html',
   styleUrls: ['./tasks-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksListComponent {
   @Input() tasks: Task[] = [];
@@ -33,9 +40,7 @@ export class TasksListComponent {
 
   getCategoryForTask(task: Task): Category | undefined {
     if (!task.categoryId) return undefined;
-    return this.categories.find(
-      (category) => category.id === task.categoryId
-    );
+    return this.categories.find((category) => category.id === task.categoryId);
   }
 
   get hasTasks(): boolean {

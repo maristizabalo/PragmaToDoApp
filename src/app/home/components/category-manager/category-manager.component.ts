@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule, ModalController, AlertController } from '@ionic/angular';
 import { Category } from '../../../core/models/category.model';
@@ -10,6 +15,7 @@ import { CategoryService } from '../../../core/services/category.service';
   imports: [IonicModule, CommonModule],
   templateUrl: './category-manager.component.html',
   styleUrls: ['./category-manager.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryManagerComponent implements OnInit {
   @Input() categories: Category[] = [];
@@ -28,7 +34,7 @@ export class CategoryManagerComponent implements OnInit {
   constructor(
     private readonly modalCtrl: ModalController,
     private readonly alertCtrl: AlertController,
-    private readonly categoryService: CategoryService
+    private readonly categoryService: CategoryService,
   ) {}
 
   ngOnInit(): void {
@@ -45,13 +51,13 @@ export class CategoryManagerComponent implements OnInit {
         categories: this.localCategories,
         deletedCategoryIds: this.deletedCategoryIds,
       },
-      'save'
+      'save',
     );
   }
 
   private getRandomColor(): string {
-    const colorIndex = Math.floor(Math.random() * this.colorPalette.length);
-    return this.colorPalette[colorIndex];
+    const randomIndex = Math.floor(Math.random() * this.colorPalette.length);
+    return this.colorPalette[randomIndex];
   }
 
   async addCategory() {
@@ -72,13 +78,13 @@ export class CategoryManagerComponent implements OnInit {
         {
           text: 'Guardar',
           handler: (data) => {
-            const categoryName = (data?.name || '').trim();
-            if (!categoryName) return false;
+            const name = (data?.name || '').trim();
+            if (!name) return false;
 
             const color = this.getRandomColor();
             const newCategory = this.categoryService.createCategory(
-              categoryName,
-              color
+              name,
+              color,
             );
             this.localCategories = [...this.localCategories, newCategory];
             return true;
@@ -109,14 +115,14 @@ export class CategoryManagerComponent implements OnInit {
         {
           text: 'Guardar',
           handler: (data) => {
-            const categoryName = (data?.name || '').trim();
-            if (!categoryName) return false;
+            const name = (data?.name || '').trim();
+            if (!name) return false;
 
             this.localCategories = this.localCategories.map(
-              (existingCategory) =>
-                existingCategory.id === category.id
-                  ? { ...existingCategory, name: categoryName }
-                  : existingCategory
+              (categoryItem) =>
+                categoryItem.id === category.id
+                  ? { ...categoryItem, name }
+                  : categoryItem,
             );
             return true;
           },
@@ -141,7 +147,7 @@ export class CategoryManagerComponent implements OnInit {
           role: 'destructive',
           handler: () => {
             this.localCategories = this.localCategories.filter(
-              (existingCategory) => existingCategory.id !== category.id
+              (categoryItem) => categoryItem.id !== category.id,
             );
             this.deletedCategoryIds.push(category.id);
           },
@@ -150,5 +156,9 @@ export class CategoryManagerComponent implements OnInit {
     });
 
     await alert.present();
+  }
+
+  trackByCategoryId(index: number, category: Category) {
+    return category.id;
   }
 }

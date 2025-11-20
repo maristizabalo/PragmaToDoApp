@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Category } from '../../../core/models/category.model';
@@ -11,6 +17,7 @@ type TaskSegment = 'all' | 'pending' | 'done';
   imports: [IonicModule, CommonModule],
   templateUrl: './task-filters.component.html',
   styleUrls: ['./task-filters.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskFiltersComponent {
   @Input() currentSegment: TaskSegment = 'all';
@@ -28,8 +35,8 @@ export class TaskFiltersComponent {
     this.segmentChange.emit(event.detail.value);
   }
 
-  onSelectCategory(categoryId: string | null) {
-    this.categoryChange.emit(categoryId);
+  onSelectCategory(id: string | null) {
+    this.categoryChange.emit(id);
   }
 
   onCreateCategory() {

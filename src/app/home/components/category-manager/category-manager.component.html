@@ -21,36 +21,19 @@
       </div>
 
       <ion-list lines="none">
-        <ion-item
-          *ngFor="let cat of localCategories"
-          class="category-item"
-          button="true"
-        >
-          <div
-            slot="start"
-            class="category-color-dot"
-            [style.background]="cat.color || '#64748b'"
-          ></div>
+        <ion-item *ngFor="let category of localCategories; trackBy: trackByCategoryId" class="category-item"
+          button="true">
+          <div slot="start" class="category-color-dot" [style.background]="category.color || '#64748b'"></div>
 
           <ion-label>
-            <h3>{{ cat.name }}</h3>
+            <h3>{{ category.name }}</h3>
           </ion-label>
 
-          <ion-button
-            fill="clear"
-            color="medium"
-            slot="end"
-            (click)="editCategory(cat); $event.stopPropagation()"
-          >
+          <ion-button fill="clear" color="medium" slot="end" (click)="editCategory(category); $event.stopPropagation()">
             <ion-icon slot="icon-only" name="create-outline"></ion-icon>
           </ion-button>
 
-          <ion-button
-            fill="clear"
-            color="danger"
-            slot="end"
-            (click)="deleteCategory(cat); $event.stopPropagation()"
-          >
+          <ion-button fill="clear" color="danger" slot="end" (click)="deleteCategory(category); $event.stopPropagation()">
             <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
           </ion-button>
         </ion-item>

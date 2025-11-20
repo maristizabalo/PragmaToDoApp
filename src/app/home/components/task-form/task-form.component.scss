@@ -1,0 +1,15 @@
+.task-form-container {
+  padding: 16px;
+}
+
+.task-form-container .card {
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-primary);
+}
+
+.task-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}

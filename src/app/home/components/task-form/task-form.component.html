@@ -1,0 +1,52 @@
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title>{{ header }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="cancel()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="task-form-container">
+    <div class="card">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">Título</ion-label>
+          <ion-input
+            [(ngModel)]="title"
+            placeholder="Ej: Revisar reporte mensual"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Categoría</ion-label>
+          <ion-select
+            [(ngModel)]="categoryId"
+            interface="action-sheet"
+            placeholder="Sin categoría"
+          >
+            <ion-select-option [value]="null">Sin categoría</ion-select-option>
+            <ion-select-option
+              *ngFor="let cat of categories"
+              [value]="cat.id"
+            >
+              {{ cat.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+      <div class="task-form-actions">
+        <ion-button fill="clear" color="medium" (click)="cancel()">
+          Cancelar
+        </ion-button>
+        <ion-button color="primary" (click)="save()">
+          Guardar
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

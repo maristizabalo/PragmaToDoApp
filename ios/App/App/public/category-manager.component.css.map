@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/home/components/category-manager/category-manager.component.scss"],
+  "sourcesContent": ["\r\n.category-manager-container {\r\n  padding: 16px;\r\n}\r\n\r\n.category-manager-header h2 {\r\n  margin: 0 0 4px;\r\n  font-size: 1.1rem;\r\n}\r\n\r\n.category-manager-header p {\r\n  margin: 0 0 12px;\r\n  font-size: 0.85rem;\r\n  opacity: 0.8;\r\n}\r\n\r\n.category-item {\r\n  margin-bottom: 8px;\r\n  --background: rgba(15, 23, 42, 0.96);\r\n  border-radius: var(--app-radius-lg);\r\n  box-shadow: var(--app-shadow-soft);\r\n  border: 1px solid rgba(148, 163, 184, 0.16);\r\n}\r\n\r\n.category-color-dot {\r\n  width: 14px;\r\n  height: 14px;\r\n  border-radius: 999px;\r\n  margin-right: 8px;\r\n  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.9);\r\n}\r\n\r\n.category-manager-actions {\r\n  display: flex;\r\n  justify-content: space-between;\r\n  gap: 8px;\r\n  margin-top: 16px;\r\n}"],
+  "mappings": ";AACA,CAAA;AACE,WAAA;;AAGF,CAAA,wBAAA;AACE,UAAA,EAAA,EAAA;AACA,aAAA;;AAGF,CALA,wBAKA;AACE,UAAA,EAAA,EAAA;AACA,aAAA;AACA,WAAA;;AAGF,CAAA;AACE,iBAAA;AACA,gBAAA,KAAA,EAAA,EAAA,EAAA,EAAA,EAAA,EAAA;AACA,iBAAA,IAAA;AACA,cAAA,IAAA;AACA,UAAA,IAAA,MAAA,KAAA,GAAA,EAAA,GAAA,EAAA,GAAA,EAAA;;AAGF,CAAA;AACE,SAAA;AACA,UAAA;AACA,iBAAA;AACA,gBAAA;AACA,cAAA,EAAA,EAAA,EAAA,IAAA,KAAA,EAAA,EAAA,EAAA,EAAA,EAAA,EAAA;;AAGF,CAAA;AACE,WAAA;AACA,mBAAA;AACA,OAAA;AACA,cAAA;;",
+  "names": []
+}

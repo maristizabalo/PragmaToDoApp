@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/home/components/task-filters/task-filters.component.scss"],
+  "sourcesContent": [".home-filters {\r\n  margin: 8px 0 12px;\r\n}\r\n\r\n// estilos personalizados para el ion-segment\r\n.home-filters ion-segment {\r\n  --background: rgba(15, 23, 42, 0.96);\r\n  --indicator-color: var(--ion-color-primary);\r\n  --indicator-box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.6);\r\n\r\n  border-radius: var(--app-radius-lg);\r\n  box-shadow: var(--app-shadow-soft);\r\n}\r\n\r\n/* Estilo de cada botón del segmento */\r\n.home-filters ion-segment-button {\r\n  --color: #9ca3af;   \r\n  --color-checked: #f9fafb; \r\n\r\n  text-transform: uppercase;\r\n}\r\n\r\n/* labels */\r\n.home-filters ion-segment-button ion-label {\r\n  font-weight: 700;\r\n  letter-spacing: 0.06em;\r\n  font-size: 0.8rem;\r\n}\r\n\r\n.category-filters {\r\n  margin-top: 8px; //alejar un poco los label de filtros home de los chips de categorias\r\n}"],
+  "mappings": ";;;AAAA,CAAA;AACE,UAAA,IAAA,EAAA;;AAIF,CALA,aAKA;AACE,gBAAA,KAAA,EAAA,EAAA,EAAA,EAAA,EAAA,EAAA;AACA,qBAAA,IAAA;AACA,0BAAA,EAAA,EAAA,EAAA,IAAA,KAAA,GAAA,EAAA,GAAA,EAAA,GAAA,EAAA;AAEA,iBAAA,IAAA;AACA,cAAA,IAAA;;AAIF,CAfA,aAeA;AACE,WAAA;AACA,mBAAA;AAEA,kBAAA;;AAIF,CAvBA,aAuBA,mBAAA;AACE,eAAA;AACA,kBAAA;AACA,aAAA;;AAGF,CAAA;AACE,cAAA;;",
+  "names": []
+}

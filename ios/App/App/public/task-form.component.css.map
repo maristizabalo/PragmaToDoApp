@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/home/components/task-form/task-form.component.scss"],
+  "sourcesContent": [".task-form-container {\r\n  padding: 16px;\r\n}\r\n\r\n.task-form-container .card {\r\n  border-radius: var(--app-radius-lg);\r\n  box-shadow: var(--app-shadow-primary);\r\n}\r\n\r\n.task-form-actions {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  gap: 8px;\r\n  margin-top: 16px;\r\n}"],
+  "mappings": ";AAAA,CAAA;AACE,WAAA;;AAGF,CAJA,oBAIA,CAAA;AACE,iBAAA,IAAA;AACA,cAAA,IAAA;;AAGF,CAAA;AACE,WAAA;AACA,mBAAA;AACA,OAAA;AACA,cAAA;;",
+  "names": []
+}

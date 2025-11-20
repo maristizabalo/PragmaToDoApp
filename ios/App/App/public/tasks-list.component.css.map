@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/home/components/tasks-list/tasks-list.component.scss"],
-  "sourcesContent": [".tasks-list {\r\n  margin-top: 8px;\r\n  background: transparent;\r\n}\r\n\r\n.task-item {\r\n  margin-bottom: 10px;\r\n  --background: rgba(15, 23, 42, 0.96);\r\n  border-radius: var(--app-radius-lg);\r\n  box-shadow: var(--app-shadow-soft);\r\n  border: 1px solid rgba(148, 163, 184, 0.16);\r\n}\r\n\r\n.task-empty {\r\n  margin-top: 8px;\r\n  --background: transparent;\r\n}\r\n\r\n.task-completed {\r\n  text-decoration: line-through;\r\n  opacity: 0.6;\r\n}\r\n\r\n.task-category {\r\n  margin-top: 4px;\r\n  font-size: 0.8rem;\r\n}"],
-  "mappings": ";AAAA,CAAA;AACE,cAAA;AACA,cAAA;;AAGF,CAAA;AACE,iBAAA;AACA,gBAAA,KAAA,EAAA,EAAA,EAAA,EAAA,EAAA,EAAA;AACA,iBAAA,IAAA;AACA,cAAA,IAAA;AACA,UAAA,IAAA,MAAA,KAAA,GAAA,EAAA,GAAA,EAAA,GAAA,EAAA;;AAGF,CAAA;AACE,cAAA;AACA,gBAAA;;AAGF,CAAA;AACE,mBAAA;AACA,WAAA;;AAGF,CAAA;AACE,cAAA;AACA,aAAA;;",
-  "names": []
-}

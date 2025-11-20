@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/home/home.page.scss"],
-  "sourcesContent": ["#container {\n  text-align: center;\n\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 50%;\n  transform: translateY(-50%);\n}\n\n#container strong {\n  font-size: 20px;\n  line-height: 26px;\n}\n\n#container p {\n  font-size: 16px;\n  line-height: 22px;\n\n  color: #8c8c8c;\n\n  margin: 0;\n}\n\n#container a {\n  text-decoration: none;\n}\n\n.home-hero {\n  margin-bottom: 16px;\n}\n\n.pragma-toolbar {\n  --background: transparent;\n  --border-color: transparent;\n  --border-width: 0;\n\n  padding-inline-start: 0;\n  padding-inline-end: 0;\n}\n\n.pragma-title {\n  width: 100%;\n  text-align: center;\n\n  color: var(--ion-color-primary);\n  font-weight: 800;\n  letter-spacing: 0.12em;\n  font-size: 1rem;\n  text-transform: uppercase;\n\n  display: inline-block;\n  padding-bottom: 4px;\n  border-bottom: 2px solid var(--ion-color-primary);\n}"],
-  "mappings": ";AAAA,CAAA;AACE,cAAA;AAEA,YAAA;AACA,QAAA;AACA,SAAA;AACA,OAAA;AACA,aAAA,WAAA;;AAGF,CAVA,UAUA;AACE,aAAA;AACA,eAAA;;AAGF,CAfA,UAeA;AACE,aAAA;AACA,eAAA;AAEA,SAAA;AAEA,UAAA;;AAGF,CAxBA,UAwBA;AACE,mBAAA;;AAGF,CAAA;AACE,iBAAA;;AAGF,CAAA;AACE,gBAAA;AACA,kBAAA;AACA,kBAAA;AAEA,wBAAA;AACA,sBAAA;;AAGF,CAAA;AACE,SAAA;AACA,cAAA;AAEA,SAAA,IAAA;AACA,eAAA;AACA,kBAAA;AACA,aAAA;AACA,kBAAA;AAEA,WAAA;AACA,kBAAA;AACA,iBAAA,IAAA,MAAA,IAAA;;",
-  "names": []
-}

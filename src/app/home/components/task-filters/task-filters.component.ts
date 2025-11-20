@@ -25,8 +25,8 @@ export class TaskFiltersComponent {
     this.segmentChange.emit(event.detail.value);
   }
 
-  onSelectCategory(id: string | null) {
-    this.categoryChange.emit(id);
+  onSelectCategory(categoryId: string | null) {
+    this.categoryChange.emit(categoryId);
   }
 
   onCreateCategory() {

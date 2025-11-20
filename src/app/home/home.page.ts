@@ -12,6 +12,7 @@ import { CategoryService } from '../core/services/category.service';
 
 import { TasksListComponent } from './components/tasks-list/tasks-list.component';
 import { TaskFiltersComponent } from './components/task-filters/task-filters.component';
+import { CategoryManagerComponent } from './components/category-manager/category-manager.component';
 
 type TaskSegment = 'all' | 'pending' | 'done';
 
@@ -24,6 +25,8 @@ type TaskSegment = 'all' | 'pending' | 'done';
     FormsModule,
     TasksListComponent,
     TaskFiltersComponent,
+    TaskFormComponent,
+    CategoryManagerComponent,
   ],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
@@ -40,7 +43,7 @@ export class HomePage implements OnInit {
     private readonly categoryService: CategoryService,
     private readonly alertCtrl: AlertController,
     private readonly modalCtrl: ModalController
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loadTasks();
@@ -58,19 +61,21 @@ export class HomePage implements OnInit {
   }
 
   get filteredTasks(): Task[] {
-    let tasks = [...this.tasks];
+    let filteredTasks = [...this.tasks];
 
     if (this.selectedCategoryId) {
-      tasks = tasks.filter((t) => t.categoryId === this.selectedCategoryId);
+      filteredTasks = filteredTasks.filter(
+        (task) => task.categoryId === this.selectedCategoryId
+      );
     }
 
     switch (this.currentSegment) {
       case 'pending':
-        return tasks.filter((t) => !t.completed);
+        return filteredTasks.filter((task) => !task.completed);
       case 'done':
-        return tasks.filter((t) => t.completed);
+        return filteredTasks.filter((task) => task.completed);
       default:
-        return tasks;
+        return filteredTasks;
     }
   }
 
@@ -106,37 +111,85 @@ export class HomePage implements OnInit {
     }
   }
 
+  async openCategoryManagerModal() {
+    const modal = await this.modalCtrl.create({
+      component: CategoryManagerComponent,
+      componentProps: {
+        categories: this.categories,
+      },
+      breakpoints: [0, 0.6, 0.9],
+      initialBreakpoint: 0.7,
+    });
+
+    await modal.present();
+
+    const { data, role } = await modal.onDidDismiss();
+    if (role === 'save' && data) {
+      const {
+        categories: updatedCategories,
+        deletedCategoryIds,
+      }: { categories: Category[]; deletedCategoryIds: string[] } = data;
+
+      // Actualizamos categorías
+      this.categories = updatedCategories;
+      this.persistCategories();
+
+      // Para cada tarea que tenga una categoría eliminada, le quitamos la categoría
+      if (Array.isArray(deletedCategoryIds) && deletedCategoryIds.length) {
+        const deletedCategoryIdsSet = new Set(deletedCategoryIds);
+
+        this.tasks = this.tasks.map((task) =>
+          task.categoryId && deletedCategoryIdsSet.has(task.categoryId)
+            ? { ...task, categoryId: null }
+            : task
+        );
+        this.persistTasks();
+
+        // Si el filtro estaba seleccionado en una categoría eliminada, limpiamos el filtro
+        if (
+          this.selectedCategoryId &&
+          deletedCategoryIdsSet.has(this.selectedCategoryId)
+        ) {
+          this.selectedCategoryId = null;
+        }
+      }
+    }
+  }
 
   toggleTask(task: Task) {
-    this.tasks = this.tasks.map((t) =>
-      t.id === task.id ? { ...t, completed: !t.completed } : t
+    this.tasks = this.tasks.map((existingTask) =>
+      existingTask.id === task.id
+        ? { ...existingTask, completed: !existingTask.completed }
+        : existingTask
     );
     this.persistTasks();
   }
 
   deleteTask(task: Task) {
-    this.tasks = this.tasks.filter((t) => t.id !== task.id);
+    this.tasks = this.tasks.filter(
+      (existingTask) => existingTask.id !== task.id
+    );
     this.persistTasks();
   }
 
   // CATEGORY METHODS
 
   private loadCategories(): void {
-    const stored = this.categoryService.getCategories();
+    const storedCategories = this.categoryService.getCategories();
 
-    if (!stored.length) {
-      const defaults = [
+    if (!storedCategories.length) {
+      const defaultCategories = [
         this.categoryService.createCategory('Personal', '#14b8a6'),
         this.categoryService.createCategory('Trabajo', '#7c3aed'),
         this.categoryService.createCategory('Estudios', '#f97316'),
       ];
 
-      this.categories = defaults;
+      this.categories = defaultCategories;
       this.categoryService.saveCategories(this.categories);
       return;
     }
 
-    this.categories = stored;
+    this.categories = storedCategories;
   }
 
   private persistCategories(): void {
@@ -165,15 +218,23 @@ export class HomePage implements OnInit {
         {
           text: 'Guardar',
           handler: (data) => {
-            const name = (data?.name || '').trim();
-            if (!name) return false;
+            const categoryName = (data?.name || '').trim();
+            if (!categoryName) return false;
 
-            const colors = ['#7c3aed', '#14b8a6', '#f97316', '#22c55e', '#eab308'];
-            const randomColor =
-              colors[Math.floor(Math.random() * colors.length)];
+            const availableColors = [
+              '#7c3aed',
+              '#14b8a6',
+              '#f97316',
+              '#22c55e',
+              '#eab308',
+            ];
+            const randomColorIndex = Math.floor(
+              Math.random() * availableColors.length
+            );
+            const randomColor = availableColors[randomColorIndex];
 
             const newCategory = this.categoryService.createCategory(
-              name,
+              categoryName,
               randomColor
             );
             this.categories = [...this.categories, newCategory];

@@ -32,11 +32,11 @@ export class TaskFormComponent implements OnInit {
   }
 
   save() {
-    const trimmed = this.title.trim();
-    if (!trimmed) return;
+    const trimmedTitle = this.title.trim();
+    if (!trimmedTitle) return;
 
     this.modalCtrl.dismiss(
-      { title: trimmed, categoryId: this.categoryId || null },
+      { title: trimmedTitle, categoryId: this.categoryId || null },
       'save'
     );
   }

@@ -1,0 +1,77 @@
+<ion-header translucent="true">
+  <ion-toolbar color="primary">
+    <ion-title>Categorías</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="close()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="category-manager-container">
+    <div class="card">
+      <div class="category-manager-header">
+        <h2>Gestiona tus categorías</h2>
+        <p>
+          Edita, elimina o crea nuevas categorías para organizar mejor tus
+          tareas.
+        </p>
+      </div>
+
+      <ion-list lines="none">
+        <ion-item
+          *ngFor="let cat of localCategories"
+          class="category-item"
+          button="true"
+        >
+          <div
+            slot="start"
+            class="category-color-dot"
+            [style.background]="cat.color || '#64748b'"
+          ></div>
+
+          <ion-label>
+            <h3>{{ cat.name }}</h3>
+          </ion-label>
+
+          <ion-button
+            fill="clear"
+            color="medium"
+            slot="end"
+            (click)="editCategory(cat); $event.stopPropagation()"
+          >
+            <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button
+            fill="clear"
+            color="danger"
+            slot="end"
+            (click)="deleteCategory(cat); $event.stopPropagation()"
+          >
+            <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item *ngIf="!localCategories.length" lines="none">
+          <ion-label color="medium">
+            Aún no tienes categorías. Crea la primera con el botón de abajo.
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <div class="category-manager-actions">
+        <ion-button fill="clear" color="medium" (click)="addCategory()">
+          <ion-icon slot="start" name="add-outline"></ion-icon>
+          Nueva categoría
+        </ion-button>
+
+        <ion-button color="primary" (click)="save()">
+          Guardar cambios
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

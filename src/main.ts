@@ -7,12 +7,18 @@ import { AppComponent } from './app/app.component';
 
 // imports para iconos
 import { addIcons } from 'ionicons';
-import { addOutline, pricetagsOutline, trashOutline } from 'ionicons/icons';
+import {
+  addOutline,
+  pricetagsOutline,
+  trashOutline,
+  createOutline,
+} from 'ionicons/icons';
 
 addIcons({
   'add-outline': addOutline,
   'pricetags-outline': pricetagsOutline,
   'trash-outline': trashOutline,
+  'create-outline': createOutline,
 });
 
 bootstrapApplication(AppComponent, {

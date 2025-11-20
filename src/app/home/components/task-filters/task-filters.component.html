@@ -1,0 +1,34 @@
+<!-- filtros por estado que siempre se muestran -->
+<div class="home-filters">
+  <ion-segment [value]="currentSegment" (ionChange)="onSegmentChange($event)">
+    <ion-segment-button value="all">
+      <ion-label>Todo</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pending">
+      <ion-label>Pendientes</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="done">
+      <ion-label>Completadas</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<!-- filtros por cateogria si esta habilitado y hay categorias -->
+<div class="category-filters" *ngIf="categoriesEnabled && categories.length">
+  <!-- boton para ver todas las categorias -->
+  <ion-chip [color]="!selectedCategoryId ? 'primary' : 'medium'" (click)="onSelectCategory(null)">
+    <ion-label>Todas</ion-label>
+  </ion-chip>
+
+  <!-- chips de categorias -->
+  <ion-chip *ngFor="let category of categories" [style.--background]="category.color || null"
+    [color]="selectedCategoryId === category.id ? 'secondary' : 'medium'" (click)="onSelectCategory(category.id)">
+    <ion-label>{{ category.name }}</ion-label>
+  </ion-chip>
+
+  <!-- botond e nueva categoria -->
+  <ion-chip color="primary" outline="true" (click)="onCreateCategory()">
+    <ion-icon name="add-outline"></ion-icon>
+    <ion-label>Nueva</ion-label>
+  </ion-chip>
+</div>

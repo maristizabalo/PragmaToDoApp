@@ -1,0 +1,27 @@
+.tasks-list {
+  margin-top: 8px;
+  background: transparent;
+}
+
+.task-item {
+  margin-bottom: 10px;
+  --background: rgba(15, 23, 42, 0.96);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-soft);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.task-empty {
+  margin-top: 8px;
+  --background: transparent;
+}
+
+.task-completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-category {
+  margin-top: 4px;
+  font-size: 0.8rem;
+}

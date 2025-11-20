@@ -1,20 +1,45 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
+<ion-header translucent="true">
+  <ion-toolbar class="pragma-toolbar">
+    <ion-title class="pragma-title">
+      Pragma To-Do Maicol A.
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="app-container">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div class="card home-hero">
+      <h1 class="app-title">Organiza tu día</h1>
+      <p class="app-subtitle">
+        Crea tareas, asígnales categorías y mantén tu foco en lo importante.
+      </p>
+
+      <!-- chip de categorias con el feature flag para controlarlo -->
+      <ion-chip color="secondary" outline="true" (click)="openCategoryManagerModal()" *ngIf="categoriesEnabled">
+        <ion-icon name="pricetags-outline"></ion-icon>
+        <ion-label>Gestionar categorías</ion-label>
+      </ion-chip>
+
+      <!-- mensaje de categorías deshabilitadas por remote config -->
+      <ion-chip color="warning" *ngIf="!categoriesEnabled">
+        <ion-label>Categorías deshabilitadas por Remote Config</ion-label>
+      </ion-chip>
+    </div>
+
+    <!-- FILTERS AND TASKS LIST -->
+    <app-task-filters [currentSegment]="currentSegment" [categories]="categories"
+      [selectedCategoryId]="selectedCategoryId" [categoriesEnabled]="categoriesEnabled"
+      (segmentChange)="onSegmentChange($event)" (categoryChange)="selectCategory($event)"
+      (createCategory)="openCreateCategoryAlert()">
+    </app-task-filters>
+
+    <app-tasks-list [tasks]="filteredTasks" [categories]="categories" (toggle)="toggleTask($event)"
+      (delete)="deleteTask($event)"></app-tasks-list>
   </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="openCreateTaskModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

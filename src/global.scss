@@ -34,4 +34,71 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+// @import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.always.css";
+
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0f172a; // fondo algo mas elegante
+  color: #e5e7eb;
+}
+
+ion-app {
+  background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+}
+
+.app-container {
+  padding: 16px;
+}
+
+.app-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.app-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.card {
+  border-radius: var(--app-radius-lg);
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.96);
+  box-shadow: var(--app-shadow-primary);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+ion-modal {
+  --border-radius: var(--app-radius-xl);
+  --box-shadow: var(--app-shadow-soft);
+  --backdrop-opacity: 0.45;
+}
+
+// contenedor interno del modal
+ion-modal::part(content) {
+  border-radius: var(--app-radius-xl);
+  overflow: hidden;
+}
+
+ion-item {
+  --border-radius: var(--app-radius-lg);
+}
+
+ion-input,
+ion-select,
+ion-textarea {
+  --border-radius: var(--app-radius-lg);
+  border-radius: var(--app-radius-lg);
+}
+
+// para que noq ueden tan epgados
+ion-list {
+  border-radius: var(--app-radius-lg);
+}
+
+ion-button {
+  --border-radius: 999px;
+}

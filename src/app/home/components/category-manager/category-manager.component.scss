@@ -1,0 +1,38 @@
+
+.category-manager-container {
+  padding: 16px;
+}
+
+.category-manager-header h2 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+}
+
+.category-manager-header p {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.category-item {
+  margin-bottom: 8px;
+  --background: rgba(15, 23, 42, 0.96);
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-soft);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+.category-color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  margin-right: 8px;
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.9);
+}
+
+.category-manager-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 16px;
+}

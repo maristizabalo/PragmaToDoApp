@@ -1,0 +1,32 @@
+.home-filters {
+  margin: 8px 0 12px;
+}
+
+// estilos personalizados para el ion-segment
+.home-filters ion-segment {
+  --background: rgba(15, 23, 42, 0.96);
+  --indicator-color: var(--ion-color-primary);
+  --indicator-box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.6);
+
+  border-radius: var(--app-radius-lg);
+  box-shadow: var(--app-shadow-soft);
+}
+
+/* Estilo de cada botón del segmento */
+.home-filters ion-segment-button {
+  --color: #9ca3af;   
+  --color-checked: #f9fafb; 
+
+  text-transform: uppercase;
+}
+
+/* labels */
+.home-filters ion-segment-button ion-label {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+}
+
+.category-filters {
+  margin-top: 8px; //alejar un poco los label de filtros home de los chips de categorias
+}

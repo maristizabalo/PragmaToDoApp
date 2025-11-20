@@ -14,6 +14,11 @@ import {
   createOutline,
 } from 'ionicons/icons';
 
+import { environment } from './environments/environment';
+
+// imports deFirebase
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+
 addIcons({
   'add-outline': addOutline,
   'pricetags-outline': pricetagsOutline,
@@ -26,5 +31,6 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
   ],
-});
+}).catch((err) => console.error(err));

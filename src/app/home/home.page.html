@@ -6,22 +6,31 @@
 
 <ion-content [fullscreen]="true">
   <div class="app-container">
+
     <div class="card home-hero">
       <h1 class="app-title">Organiza tu día</h1>
       <p class="app-subtitle">
         Crea tareas, asígnales categorías y mantén tu foco en lo importante.
       </p>
 
-      <ion-chip color="secondary" outline="true" (click)="openCategoryManagerModal()">
+      <!-- chip de categorias con el feature flag para controlarlo -->
+      <ion-chip color="secondary" outline="true" (click)="openCategoryManagerModal()" *ngIf="categoriesEnabled">
         <ion-icon name="pricetags-outline"></ion-icon>
         <ion-label>Gestionar categorías</ion-label>
+      </ion-chip>
+
+      <!-- mensaje de categorías deshabilitadas por remote config -->
+      <ion-chip color="warning" *ngIf="!categoriesEnabled">
+        <ion-label>Categorías deshabilitadas por Remote Config</ion-label>
       </ion-chip>
     </div>
 
     <!-- FILTERS AND TASKS LIST -->
     <app-task-filters [currentSegment]="currentSegment" [categories]="categories"
-      [selectedCategoryId]="selectedCategoryId" (segmentChange)="onSegmentChange($event)"
-      (categoryChange)="selectCategory($event)" (createCategory)="openCreateCategoryAlert()"></app-task-filters>
+      [selectedCategoryId]="selectedCategoryId" [categoriesEnabled]="categoriesEnabled"
+      (segmentChange)="onSegmentChange($event)" (categoryChange)="selectCategory($event)"
+      (createCategory)="openCreateCategoryAlert()">
+    </app-task-filters>
 
     <app-tasks-list [tasks]="filteredTasks" [categories]="categories" (toggle)="toggleTask($event)"
       (delete)="deleteTask($event)"></app-tasks-list>

@@ -17,6 +17,9 @@ export class TaskFiltersComponent {
   @Input() categories: Category[] = [];
   @Input() selectedCategoryId: string | null = null;
 
+  // input controlado por feature flag de remote config
+  @Input() categoriesEnabled: boolean = true;
+
   @Output() segmentChange = new EventEmitter<TaskSegment>();
   @Output() categoryChange = new EventEmitter<string | null>();
   @Output() createCategory = new EventEmitter<void>();
